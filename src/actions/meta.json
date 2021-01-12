@@ -2,13 +2,21 @@
 	"name": "gitlab",
 	"description": "workerB package for gitlab.com",
 	"icon": "https://raw.githubusercontent.com/workerb-io/wb-gitlab/master/src/actions/logo.png",
-	"sites": ["https://gitlab.com"],
+	"sites": [
+		"https://gitlab.com"
+	],
 	"scripts": [
 		{
 			"name": "projects",
 			"file": "projects",
 			"type": "folder",
 			"description": "List of projects"
+		},
+		{
+			"name": "groups",
+			"file": "groups",
+			"type": "folder",
+			"description": "List of groups"
 		},
 		{
 			"name": "get_options",
@@ -21,6 +29,12 @@
 			"file": "setup.js",
 			"type": "action",
 			"description": "Setup Gitlab"
+		},
+		{
+			"name": "reset",
+			"file": "reset.js",
+			"type": "action",
+			"description": "Remove Gitlab Token"
 		}
 	]
 }

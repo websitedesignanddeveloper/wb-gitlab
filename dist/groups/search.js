@@ -91,20 +91,20 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./src/actions/setup.ts");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/actions/groups/search.ts");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./src/actions/setup.ts":
-/*!******************************!*\
-  !*** ./src/actions/setup.ts ***!
-  \******************************/
+/***/ "./src/actions/groups/search.ts":
+/*!**************************************!*\
+  !*** ./src/actions/groups/search.ts ***!
+  \**************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\r\nvar token = null;\r\nif (args[0]) {\r\n    token = args[0];\r\n}\r\nelse {\r\n    open('https://gitlab.com/profile/personal_access_tokens');\r\n    var tokenName = \"workerb-\" + new Date().getTime();\r\n    type(tokenName, 'Name', { method: 'by_label' });\r\n    click('api', {});\r\n    click('read_user', {});\r\n    click('read_api', {});\r\n    click('read_repository', {});\r\n    click('write_repository', {});\r\n    click('read_registry', {});\r\n    click('write_registry', {});\r\n    //@ts-ignore\r\n    submit('Name', {\r\n        //@ts-ignore\r\n        method: 'by_label',\r\n        //@ts-ignore\r\n        expectReload: true,\r\n    });\r\n    token = read('#created-personal-access-token', { method: 'by_query_selector' });\r\n}\r\nif (!token) {\r\n    notify('Failed to save the auth token.', 'error', 3000);\r\n}\r\nelse {\r\n    setVars([\r\n        {\r\n            name: 'GITLAB_PERSONAL_TOKEN',\r\n            value: token,\r\n        },\r\n    ], { local: true });\r\n    notify('Access token added successfully.', 'success', 3000);\r\n    reIndex();\r\n}\r\n\n\n//# sourceURL=webpack://main/./src/actions/setup.ts?");
+eval("\r\nif (args[0]) {\r\n    open(\"https://gitlab.com/dashboard/groups?sort=latest_activity_desc&name=\" + args[0] + \"&sort=latest_activity_desc\");\r\n}\r\nelse {\r\n    open('https://gitlab.com/dashboard/groups');\r\n}\r\n\n\n//# sourceURL=webpack://main/./src/actions/groups/search.ts?");
 
 /***/ })
 

@@ -55,3 +55,7 @@ export const deletePipeline = (project: string | number, pipelineId: number) =>
 
 export const rerunPipeline = (projectId: string | number, pipelineId: number) =>
 	request.post(`/projects/${projectId}/pipelines/${pipelineId}/retry`)
+
+export const getAllOrganizations = () => request.get(`/groups`)
+
+export const getAllOrgProjects = (id: string) => request.get(`/groups/${id}/projects`)

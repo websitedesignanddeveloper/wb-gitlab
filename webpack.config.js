@@ -59,6 +59,5 @@ module.exports = {
         concurrency: 100,
       },
     }),
-    new webpack.DefinePlugin(helpers.envKeys),
   ],
 };

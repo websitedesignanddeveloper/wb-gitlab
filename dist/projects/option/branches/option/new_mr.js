@@ -1,1 +1,160 @@
-!function(e,t){"object"==typeof exports&&"object"==typeof module?module.exports=t():"function"==typeof define&&define.amd?define([],t):"object"==typeof exports?exports.main=t():e.main=t()}(this,(function(){return function(e){var t={};function r(n){if(t[n])return t[n].exports;var o=t[n]={i:n,l:!1,exports:{}};return e[n].call(o.exports,o,o.exports,r),o.l=!0,o.exports}return r.m=e,r.c=t,r.d=function(e,t,n){r.o(e,t)||Object.defineProperty(e,t,{enumerable:!0,get:n})},r.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},r.t=function(e,t){if(1&t&&(e=r(e)),8&t)return e;if(4&t&&"object"==typeof e&&e&&e.__esModule)return e;var n=Object.create(null);if(r.r(n),Object.defineProperty(n,"default",{enumerable:!0,value:e}),2&t&&"string"!=typeof e)for(var o in e)r.d(n,o,function(t){return e[t]}.bind(null,o));return n},r.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return r.d(t,"a",t),t},r.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},r.p="",r(r.s=10)}([function(e,t,r){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.store=t.token=t.uri=void 0,t.uri="https://gitlab.com/api/v4",t.token=VARS.GITLAB_PERSONAL_TOKEN;var n={setData:function(e,t){localStorage.setItem(e,JSON.stringify(t))},getData:function(e){return JSON.parse(localStorage.getItem(e))}};t.store=n},function(e,t,r){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.handleErrors=t.decodeApiResponse=t.api=void 0;var n=r(0);t.api=function(e){return""+n.uri+e},t.decodeApiResponse=function(e){var t=e;return t.response?{response:JSON.parse(t.response),status:t.status}:{response:{},status:t.status}},t.handleErrors=function(e,t){switch(e){case 400:case 401:case 403:case 404:case 405:case 406:case 500:notify(t,"error",3e3)}}},function(e,t,r){"use strict";var n=this&&this.__importDefault||function(e){return e&&e.__esModule?e:{default:e}};Object.defineProperty(t,"__esModule",{value:!0}),t.rerunPipeline=t.deletePipeline=t.createNewPipeline=t.getAllPipelines=t.deleteIssue=t.updateIssue=t.createNewIssue=t.getAllIssuesList=t.deleteMR=t.mergeMR=t.getAllMergeRequest=t.createNewMR=t.deleteMergedBranches=t.removeBranch=t.createNewBranch=t.listAllBranches=t.updateProject=t.removeProject=t.createNewProject=t.getAllProjects=t.getUserInfo=void 0;var o=n(r(3));t.getUserInfo=function(){return o.default.get("/user")},t.getAllProjects=function(){return o.default.get("/projects?membership=true")},t.createNewProject=function(e){return o.default.post("/projects",e)},t.removeProject=function(e){return o.default.delete("/projects/"+e)},t.updateProject=function(e,t){return o.default.put("/projects/"+e,t)},t.listAllBranches=function(e){return o.default.get("/projects/"+e+"/repository/branches")},t.createNewBranch=function(e,t){return o.default.post("/projects/"+e+"/repository/branches",t)},t.removeBranch=function(e,t){return o.default.delete("/projects/"+e+"/repository/branches/"+t)},t.deleteMergedBranches=function(e){return o.default.delete("/projects/"+e+"/repository/merged_branches")},t.createNewMR=function(e,t){return o.default.post("/projects/"+e+"/merge_requests",t)},t.getAllMergeRequest=function(e){return o.default.get("/projects/"+e+"/merge_requests?state=opened")},t.mergeMR=function(e,t){return o.default.put("/projects/"+e+"/merge_requests/"+t+"/merge")},t.deleteMR=function(e,t){return o.default.delete("/projects/"+e+"/merge_requests/"+t)},t.getAllIssuesList=function(e){return o.default.get("/projects/"+e+"/issues")},t.createNewIssue=function(e,t){return o.default.post("/projects/"+e+"/issues",t)},t.updateIssue=function(e,t,r){return o.default.put("/projects/"+e+"/issues/"+t,r)},t.deleteIssue=function(e,t){return o.default.delete("/projects/"+e+"/issues/"+t)},t.getAllPipelines=function(e){return o.default.get("/projects/"+e+"/pipelines")},t.createNewPipeline=function(e,t){return o.default.post("/projects/"+e+"/pipeline",t)},t.deletePipeline=function(e,t){return o.default.delete("/projects/"+e+"/pipelines/"+t)},t.rerunPipeline=function(e,t){return o.default.post("/projects/"+e+"/pipelines/"+t+"/retry")}},function(e,t,r){"use strict";var n=this&&this.__assign||function(){return(n=Object.assign||function(e){for(var t,r=1,n=arguments.length;r<n;r++)for(var o in t=arguments[r])Object.prototype.hasOwnProperty.call(t,o)&&(e[o]=t[o]);return e}).apply(this,arguments)};Object.defineProperty(t,"__esModule",{value:!0});var o=r(0),s=r(1),i={"Private-Token":""+o.token,"content-type":"application/json"},u=new(function(){function e(){this.api=s.api}return e.prototype.get=function(e,t){return void 0===t&&(t={}),httpGet(this.api(e),n(n({},i),t))},e.prototype.delete=function(e,t,r){return void 0===t&&(t={}),void 0===r&&(r={}),httpDelete(this.api(e),JSON.stringify(t),n(n({},i),r))},e.prototype.put=function(e,t,r){return void 0===t&&(t={}),void 0===r&&(r={}),httpPut(this.api(e),JSON.stringify(t),n(n({},i),r))},e.prototype.post=function(e,t,r){return void 0===t&&(t={}),void 0===r&&(r={}),httpPost(this.api(e),JSON.stringify(t),n(n({},i),r))},e}());t.default=u},,,,,,,function(e,t,r){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var n=r(2),o=r(1);if((null===options||void 0===options?void 0:options.projects)&&(null===options||void 0===options?void 0:options.branches)){var s=options.projects,i=s.id,u=s.name,c=options.branches.name,a=args.filter(Boolean).join(" "),p=a.split(" "),l=p.indexOf("ref"),f=-1!==l?p.slice(l+1).join(" "):"master",d=-1===l?a:p.slice(0,l).join(" ");if(c===f)notify("Source Branch and Target branch are same","success",3e3);else{var g=n.createNewMR(i,{source_branch:c,target_branch:f,title:d}),j=o.decodeApiResponse(g);j.status>=400?o.handleErrors(j.status,j.response.message):(notify("Merge request created","success",3e3),open(j.response.web_url),reIndex(["gitlab","projects",u,"branches"]))}}}])}));
+(function webpackUniversalModuleDefinition(root, factory) {
+	if(typeof exports === 'object' && typeof module === 'object')
+		module.exports = factory();
+	else if(typeof define === 'function' && define.amd)
+		define([], factory);
+	else if(typeof exports === 'object')
+		exports["main"] = factory();
+	else
+		root["main"] = factory();
+})(this, function() {
+return /******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/actions/projects/option/branches/option/new_mr.ts");
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ "./src/actions/projects/option/branches/option/new_mr.ts":
+/*!***************************************************************!*\
+  !*** ./src/actions/projects/option/branches/option/new_mr.ts ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\nvar api_1 = __webpack_require__(/*! ../../../../../utils/api */ \"./src/utils/api.ts\");\r\nvar helper_1 = __webpack_require__(/*! ../../../../../utils/helper */ \"./src/utils/helper.ts\");\r\nif ((options === null || options === void 0 ? void 0 : options.projects) && (options === null || options === void 0 ? void 0 : options.branches)) {\r\n    var _a = options.projects, id = _a.id, projectName = _a.name;\r\n    var sourceBranchName = options.branches.name;\r\n    var mrPayload = args.filter(Boolean).join(' ');\r\n    var mrPayloadArgs = mrPayload.split(' ');\r\n    var refIndex = mrPayloadArgs.indexOf('ref');\r\n    var targetBranchName = refIndex !== -1 ? mrPayloadArgs.slice(refIndex + 1).join(' ') : 'master';\r\n    var mrName = refIndex === -1 ? mrPayload : mrPayloadArgs.slice(0, refIndex).join(' ');\r\n    if (sourceBranchName === targetBranchName) {\r\n        notify('Source Branch and Target branch are same', 'success', 3000);\r\n    }\r\n    else {\r\n        var response = api_1.createNewMR(id, {\r\n            source_branch: sourceBranchName,\r\n            target_branch: targetBranchName,\r\n            title: mrName,\r\n        });\r\n        var result = helper_1.decodeApiResponse(response);\r\n        if (result.status >= 400) {\r\n            helper_1.handleErrors(result.status, result.response.message);\r\n        }\r\n        else {\r\n            notify('Merge request created', 'success', 3000);\r\n            open(result.response.web_url);\r\n            reIndex(['gitlab', 'projects', projectName, 'branches']);\r\n        }\r\n    }\r\n}\r\n\n\n//# sourceURL=webpack://main/./src/actions/projects/option/branches/option/new_mr.ts?");
+
+/***/ }),
+
+/***/ "./src/utils/api.ts":
+/*!**************************!*\
+  !*** ./src/utils/api.ts ***!
+  \**************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod) {\r\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\r\n};\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\nexports.getAllOrgProjects = exports.getAllOrganizations = exports.rerunPipeline = exports.deletePipeline = exports.createNewPipeline = exports.getAllPipelines = exports.deleteIssue = exports.updateIssue = exports.createNewIssue = exports.getAllIssuesList = exports.deleteMR = exports.mergeMR = exports.getAllMergeRequest = exports.createNewMR = exports.deleteMergedBranches = exports.removeBranch = exports.createNewBranch = exports.listAllBranches = exports.updateProject = exports.removeProject = exports.createNewProject = exports.getAllProjects = exports.getUserInfo = void 0;\r\n/* eslint-disable import/prefer-default-export */\r\nvar request_1 = __importDefault(__webpack_require__(/*! ./request */ \"./src/utils/request.ts\"));\r\nexports.getUserInfo = function () { return request_1.default.get('/user'); };\r\nexports.getAllProjects = function () { return request_1.default.get(\"/projects?membership=true\"); };\r\nexports.createNewProject = function (data) { return request_1.default.post(\"/projects\", data); };\r\nexports.removeProject = function (id) { return request_1.default.delete(\"/projects/\" + id); };\r\nexports.updateProject = function (id, data) { return request_1.default.put(\"/projects/\" + id, data); };\r\nexports.listAllBranches = function (projectId) { return request_1.default.get(\"/projects/\" + projectId + \"/repository/branches\"); };\r\nexports.createNewBranch = function (projectId, data) {\r\n    return request_1.default.post(\"/projects/\" + projectId + \"/repository/branches\", data);\r\n};\r\nexports.removeBranch = function (projectId, branchName) {\r\n    return request_1.default.delete(\"/projects/\" + projectId + \"/repository/branches/\" + branchName);\r\n};\r\nexports.deleteMergedBranches = function (projectId) {\r\n    return request_1.default.delete(\"/projects/\" + projectId + \"/repository/merged_branches\");\r\n};\r\nexports.createNewMR = function (projectId, data) {\r\n    return request_1.default.post(\"/projects/\" + projectId + \"/merge_requests\", data);\r\n};\r\nexports.getAllMergeRequest = function (projectId) {\r\n    return request_1.default.get(\"/projects/\" + projectId + \"/merge_requests?state=opened\");\r\n};\r\nexports.mergeMR = function (projectId, mrId) {\r\n    return request_1.default.put(\"/projects/\" + projectId + \"/merge_requests/\" + mrId + \"/merge\");\r\n};\r\nexports.deleteMR = function (projectId, mrId) {\r\n    return request_1.default.delete(\"/projects/\" + projectId + \"/merge_requests/\" + mrId);\r\n};\r\nexports.getAllIssuesList = function (projectId) { return request_1.default.get(\"/projects/\" + projectId + \"/issues\"); };\r\nexports.createNewIssue = function (projectId, data) {\r\n    return request_1.default.post(\"/projects/\" + projectId + \"/issues\", data);\r\n};\r\nexports.updateIssue = function (projectId, issueId, data) {\r\n    return request_1.default.put(\"/projects/\" + projectId + \"/issues/\" + issueId, data);\r\n};\r\nexports.deleteIssue = function (projectId, issueId) {\r\n    return request_1.default.delete(\"/projects/\" + projectId + \"/issues/\" + issueId);\r\n};\r\nexports.getAllPipelines = function (projectId) { return request_1.default.get(\"/projects/\" + projectId + \"/pipelines\"); };\r\nexports.createNewPipeline = function (projectId, data) {\r\n    return request_1.default.post(\"/projects/\" + projectId + \"/pipeline\", data);\r\n};\r\nexports.deletePipeline = function (project, pipelineId) {\r\n    return request_1.default.delete(\"/projects/\" + project + \"/pipelines/\" + pipelineId);\r\n};\r\nexports.rerunPipeline = function (projectId, pipelineId) {\r\n    return request_1.default.post(\"/projects/\" + projectId + \"/pipelines/\" + pipelineId + \"/retry\");\r\n};\r\nexports.getAllOrganizations = function () { return request_1.default.get(\"/groups\"); };\r\nexports.getAllOrgProjects = function (id) { return request_1.default.get(\"/groups/\" + id + \"/projects\"); };\r\n\n\n//# sourceURL=webpack://main/./src/utils/api.ts?");
+
+/***/ }),
+
+/***/ "./src/utils/constants.ts":
+/*!********************************!*\
+  !*** ./src/utils/constants.ts ***!
+  \********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\nexports.store = exports.token = exports.uri = void 0;\r\n/* eslint-disable import/prefer-default-export */\r\nexports.uri = \"https://gitlab.com/api/v4\";\r\nexports.token = VARS['GITLAB_PERSONAL_TOKEN'];\r\nvar storageSetter = {\r\n    setData: function (key, data) {\r\n        localStorage.setItem(key, JSON.stringify(data));\r\n    },\r\n    getData: function (key) {\r\n        return JSON.parse(localStorage.getItem(key));\r\n    },\r\n};\r\nexports.store = storageSetter;\r\n\n\n//# sourceURL=webpack://main/./src/utils/constants.ts?");
+
+/***/ }),
+
+/***/ "./src/utils/helper.ts":
+/*!*****************************!*\
+  !*** ./src/utils/helper.ts ***!
+  \*****************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\nexports.handleErrors = exports.decodeApiResponse = exports.api = void 0;\r\n/* eslint-disable default-case */\r\nvar constants_1 = __webpack_require__(/*! ./constants */ \"./src/utils/constants.ts\");\r\nfunction api(endpoint) {\r\n    return \"\" + constants_1.uri + endpoint;\r\n}\r\nexports.api = api;\r\nfunction decodeApiResponse(apiResponse) {\r\n    var result = apiResponse;\r\n    if (!result.response) {\r\n        return {\r\n            response: {},\r\n            status: result.status,\r\n        };\r\n    }\r\n    return {\r\n        response: JSON.parse(result.response),\r\n        status: result.status,\r\n    };\r\n}\r\nexports.decodeApiResponse = decodeApiResponse;\r\nexports.handleErrors = function (status, response) {\r\n    switch (status) {\r\n        case 400:\r\n        case 401:\r\n        case 403:\r\n        case 404:\r\n        case 405:\r\n        case 406:\r\n        case 500:\r\n            notify(response, 'error', 3000);\r\n    }\r\n};\r\n\n\n//# sourceURL=webpack://main/./src/utils/helper.ts?");
+
+/***/ }),
+
+/***/ "./src/utils/request.ts":
+/*!******************************!*\
+  !*** ./src/utils/request.ts ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\r\nvar __assign = (this && this.__assign) || function () {\r\n    __assign = Object.assign || function(t) {\r\n        for (var s, i = 1, n = arguments.length; i < n; i++) {\r\n            s = arguments[i];\r\n            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))\r\n                t[p] = s[p];\r\n        }\r\n        return t;\r\n    };\r\n    return __assign.apply(this, arguments);\r\n};\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\nvar constants_1 = __webpack_require__(/*! ./constants */ \"./src/utils/constants.ts\");\r\nvar helper_1 = __webpack_require__(/*! ./helper */ \"./src/utils/helper.ts\");\r\nvar commonHeaders = {\r\n    \"Private-Token\": \"\" + constants_1.token,\r\n    \"content-type\": \"application/json\",\r\n};\r\nvar Request = /** @class */ (function () {\r\n    function Request() {\r\n        this.api = helper_1.api;\r\n    }\r\n    Request.prototype.get = function (uri, headers) {\r\n        if (headers === void 0) { headers = {}; }\r\n        return httpGet(this.api(uri), __assign(__assign({}, commonHeaders), headers));\r\n    };\r\n    Request.prototype.delete = function (uri, data, headers) {\r\n        if (data === void 0) { data = {}; }\r\n        if (headers === void 0) { headers = {}; }\r\n        return httpDelete(this.api(uri), JSON.stringify(data), __assign(__assign({}, commonHeaders), headers));\r\n    };\r\n    Request.prototype.put = function (uri, data, headers) {\r\n        if (data === void 0) { data = {}; }\r\n        if (headers === void 0) { headers = {}; }\r\n        return httpPut(this.api(uri), JSON.stringify(data), __assign(__assign({}, commonHeaders), headers));\r\n    };\r\n    Request.prototype.post = function (uri, data, headers) {\r\n        if (data === void 0) { data = {}; }\r\n        if (headers === void 0) { headers = {}; }\r\n        return httpPost(this.api(uri), JSON.stringify(data), __assign(__assign({}, commonHeaders), headers));\r\n    };\r\n    return Request;\r\n}());\r\nvar request = new Request();\r\nexports.default = request;\r\n\n\n//# sourceURL=webpack://main/./src/utils/request.ts?");
+
+/***/ })
+
+/******/ });
+});

@@ -9,7 +9,7 @@ function parseISOString(s: string) {
 }
 
 export default () => {
-	if (options?.projects) {
+	if (options ?.projects) {
 		const { id: projectId } = options.projects
 		const response = getAllPipelines(projectId)
 		const result = decodeApiResponse(response)
@@ -25,16 +25,16 @@ export default () => {
 				status,
 				created_at,
 			}: {
-				web_url: string
-				id: number
-				status: string
-				created_at: string
-			}) => ({
-				id,
-				name: `Pipeline: #${id}`,
-				html_url: web_url,
-				description: `Created on ${parseISOString(created_at)}. Status: ${status}`,
-			})
+					web_url: string
+					id: number
+					status: string
+					created_at: string
+				}) => ({
+					id,
+					name: `Pipeline: #${id}`,
+					html_url: web_url,
+					description: `Created on ${parseISOString(created_at)}. Status: ${status}`,
+				})
 		)
 
 		// eslint-disable-next-line consistent-return

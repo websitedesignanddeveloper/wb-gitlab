@@ -30,12 +30,13 @@ if (args[0]) {
 if (!token) {
 	notify('Failed to save the auth token.', 'error', 3000)
 } else {
-	setVar('gitlab', [
+	setVars([
 		{
 			name: 'GITLAB_PERSONAL_TOKEN',
 			value: token,
 		},
-	])
+	], { local: true })
+
 	notify('Access token added successfully.', 'success', 3000)
 	reIndex()
 }

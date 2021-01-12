@@ -91,19 +91,20 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./src/actions/projects/option/issues/option/index.ts");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/actions/groups/option/search.ts");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./src/actions/projects/option/issues/option/index.ts":
-/*!************************************************************!*\
-  !*** ./src/actions/projects/option/issues/option/index.ts ***!
-  \************************************************************/
+/***/ "./src/actions/groups/option/search.ts":
+/*!*********************************************!*\
+  !*** ./src/actions/groups/option/search.ts ***!
+  \*********************************************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-eval("throw new Error(\"Module build failed (from ./node_modules/ts-loader/index.js):\\nError: ENOENT: no such file or directory, open '/Users/workerb/workspace/packages/wb-gitlab/src/actions/projects/option/issues/option/index.ts'\");\n\n//# sourceURL=webpack://main/./src/actions/projects/option/issues/option/index.ts?");
+"use strict";
+eval("\r\nif (options.org) {\r\n    //notify(\"group id: \"+options.org.id,\"success\",3000)\r\n    //open(`https://gitlab.com/api/v4/groups/${options.org.id}/projects`)\r\n    open(\"\" + options.org.html_url);\r\n}\r\nelse {\r\n    notify('No repository found', 'error', 3000);\r\n}\r\n\n\n//# sourceURL=webpack://main/./src/actions/groups/option/search.ts?");
 
 /***/ })
 

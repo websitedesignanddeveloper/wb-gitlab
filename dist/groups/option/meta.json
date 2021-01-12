@@ -1,0 +1,19 @@
+{
+	"name": "option",
+	"description": "option cheat sheet",
+	"default_action": "action",
+	"scripts": [
+		{
+			"name": "get_options",
+			"file": "get_options.js",
+			"type": "action",
+			"description": "get option"
+		},
+		{
+			"name": "search",
+			"file": "search.js",
+			"type": "action",
+			"description": "Search all organizations"
+		}
+	]
+}

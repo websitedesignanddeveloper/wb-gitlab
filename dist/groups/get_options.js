@@ -91,20 +91,20 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./src/actions/projects/option/branches/delete_merged.ts");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/actions/groups/get_options.ts");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./src/actions/projects/option/branches/delete_merged.ts":
-/*!***************************************************************!*\
-  !*** ./src/actions/projects/option/branches/delete_merged.ts ***!
-  \***************************************************************/
+/***/ "./src/actions/groups/get_options.ts":
+/*!*******************************************!*\
+  !*** ./src/actions/groups/get_options.ts ***!
+  \*******************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\nvar api_1 = __webpack_require__(/*! ../../../../utils/api */ \"./src/utils/api.ts\");\r\nvar helper_1 = __webpack_require__(/*! ../../../../utils/helper */ \"./src/utils/helper.ts\");\r\nif (options === null || options === void 0 ? void 0 : options.projects) {\r\n    var _a = options.projects, id = _a.id, projectName = _a.name;\r\n    var response = api_1.deleteMergedBranches(id);\r\n    var result = helper_1.decodeApiResponse(response);\r\n    if (result.status >= 400) {\r\n        helper_1.handleErrors(result.status, result.response.message ? result.response.message : result.response.error);\r\n    }\r\n    else {\r\n        notify('Branch removed', 'success', 300);\r\n        reIndex(['gitlab', 'projects', projectName, 'branches']);\r\n    }\r\n}\r\n\n\n//# sourceURL=webpack://main/./src/actions/projects/option/branches/delete_merged.ts?");
+eval("\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\n/* eslint-disable consistent-return */\r\nvar api_1 = __webpack_require__(/*! ../../utils/api */ \"./src/utils/api.ts\");\r\nvar helper_1 = __webpack_require__(/*! ../../utils/helper */ \"./src/utils/helper.ts\");\r\nexports.default = (function () {\r\n    var response = api_1.getAllOrganizations();\r\n    var result = helper_1.decodeApiResponse(response);\r\n    if (result.status >= 400) {\r\n        return {};\r\n    }\r\n    var projects = result.response.map(function (project) { return ({\r\n        name: project.name,\r\n        html_url: project.web_url,\r\n        id: project.id,\r\n        identifier: project.id,\r\n        description: project.web_url,\r\n    }); });\r\n    return JSON.stringify({\r\n        add: projects,\r\n    });\r\n});\r\n\n\n//# sourceURL=webpack://main/./src/actions/groups/get_options.ts?");
 
 /***/ }),
 
